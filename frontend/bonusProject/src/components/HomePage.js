@@ -77,7 +77,7 @@ return (
   <Container>
     <Row className="my-4">
       <Col>
-        <h1>My Blog</h1>
+        <h1>Student Data</h1>
       </Col>
     </Row>
     <Row className="my-4">

@@ -58,7 +58,7 @@ const CreateUser = () => {
     <Container >
       <Row className="my-4">
         <Col>
-          <h1>Sign In</h1>
+          <h1>Registration</h1>
         </Col>
       </Row>
       <Row>
