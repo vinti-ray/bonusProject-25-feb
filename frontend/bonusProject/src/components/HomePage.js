@@ -1,41 +1,69 @@
 import axios from 'axios'
 import React,{useEffect,useState} from 'react'
-import { Container, Row, Col, Card, Button ,ButtonGroup} from 'react-bootstrap'
-import { useParams } from 'react-router-dom'
+import { Container, Row, Col,Form, Card, Button ,ButtonGroup} from 'react-bootstrap'
 
+import{useNavigate , Link} from "react-router-dom"
 
+import Popup from './popUp'
 
 const HomePage = () => {
 const [data,setData] = useState([])
-const [studentId,setStudentId] = useState([])
+const [studentId,setStudentId] = useState("")
+const [name,setName] = useState("")
+const [subject,setSubject] = useState("")
+const [marks,setMarks] = useState("")
 // const {studentId} = useParams()
+const navigate = useNavigate()
+const [showPopup, setShowPopup] = useState(false);
+
+const togglePopup = () => {
+  setShowPopup(!showPopup);
+};
 
 
 
-console.log(studentId);
 useEffect(()=>{
+
+
   var token = localStorage.getItem("token")
   axios.get("http://localhost:3001/getStudent",{headers:{'authorization':token}})
-  .then((res)=>{setStudentId(res.data.data._id);setData(res.data.data)})
+  .then((res)=>{setData(res.data.data)})
+
+
+
 },[])
+
+
 
 
   const onDelete = (e)=>{
     var token = localStorage.getItem("token")
-    e.preventDefault()
+    // e.preventDefault()
+    if(studentId){
     axios.delete(`http://localhost:3001/deleteStudent/${studentId}`,{headers:{'authorization':token}})
-    .then(()=>{alert("Deleted Successfully")})
-    .catch((res)=>{alert(res.data.data._id)})
+    .then(()=>{navigate("/")})
+    .catch((res)=>{alert(res.data)})
   }
-  
-
-
-const onEdit = (e)=>{
-  var token = localStorage.getItem("token")
-  e.preventDefault()
-  axios.put(`http://localhost:3001/updateStudent/${studentId}`,{headers:{'authorization':token}})
-  
 }
+
+
+const onEdit = async(e)=>{
+  e.preventDefault()
+  console.log(studentId)
+  // {setStudentId(post._id)}
+  console.log(studentId);
+
+  let token = localStorage.getItem("token")
+  let data={
+    name:name,
+    subject:subject,
+    marks:marks
+  }
+  if(studentId){
+    axios.put(`http://localhost:3001/updateStudent/${studentId}`,data,{headers:{'authorization':token}})
+    .then(()=>{navigate("/")})
+    .catch((res)=>{alert(res.data)})
+}}
 
 
 
@@ -51,12 +79,13 @@ return (
     <Row className="my-4">
       {data.map(post => (
         <Col md={6} key={post._id}>
+          
           <Card>
          
             <Card.Body>
               <Card.Title className="card-title">Name:{post.name}</Card.Title>
-              <Card.Text>
-                <p style={{color:"blue"}}>Sunject:{post.subject}</p>
+              <Card.Text style={{color:"blue"}}>
+                Sunject:{post.subject}
               </Card.Text>
               <Card.Text style={{color:"grey"}}>
                 Marks: {post.marks}
@@ -64,13 +93,40 @@ return (
               <Card.Text className="card-text">
                {post.summary}
               </Card.Text>
-
+          
 
              
               {/* <ButtonGroup aria-label="First group"  > */}
-              <Button variant="warning" href={`/${post._id}`} onClick ={onEdit}  >Edit</Button> 
-              
-              <Button variant="danger" className="ml-2 mx-4"  href={`/${post._id}`}  {setStudentId{}} onClick={onDelete}  >Delete</Button>
+              {/* <Button variant="warning" href={`/${post._id}`} onClick ={onEdit}  >Edit</Button> 
+               */}
+                     <button id={post._id} onClick={()=>{{togglePopup()} ;{setStudentId(post._id)};}}>Edit data</button>
+                        {showPopup && (
+                          <Popup
+                            content={ <Form >
+                            <Form.Group className="mb-3" controlId="formBasicName">
+                                <Form.Label>name</Form.Label>
+                                
+                                <Form.Control type="text" value={name}  onChange={(event) => setName(event.target.value)} />
+
+                              </Form.Group>
+                              <Form.Group className="mb-3" controlId="formBasicsubject">                      
+                                <Form.Label>subjects</Form.Label>
+                                <Form.Control type='subject' value={subject} onChange={(q)=>setSubject(q.target.value)}  />
+                              </Form.Group>
+                              <Form.Group className="mb-3" controlId="formBasicmarks">
+                                <Form.Label>marks</Form.Label>
+                                <Form.Control type="number" value={marks}  onChange={(event) => setMarks(event.target.value)} />
+                              </Form.Group>
+                              <Button variant="danger" type="submit" onClick={onEdit}>submit</Button>
+                              </Form>
+                            }
+                            closePopup={togglePopup}
+                          />
+                        )}
+
+
+
+              <Button variant="danger" className="ml-2 mx-4"  onClick={()=>{{onDelete()} ;{setStudentId(post._id)} }} >Delete  </Button>
 
              {/* </ButtonGroup> */}
            

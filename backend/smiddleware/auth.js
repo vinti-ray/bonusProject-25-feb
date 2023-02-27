@@ -3,7 +3,8 @@ const jwt=require("jsonwebtoken")
 const authentication=async (req,res,next)=>{
     try {
             let token = req.headers["authorization"]
-            if(!token) return res.status(400).send({status:false,message:"please enter token"})
+            console.log(token);
+            // if(!token) return res.status(400).send({status:false,message:"please enter token"})
           
             
         

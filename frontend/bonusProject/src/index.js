@@ -16,9 +16,9 @@ root.render(
   <Routes>
   {/* <Route  path='/' element={<App />} /> */}
   {/* <Route path='/' element={<HomePage/>} /> */}
-  <Route path='/' element={<HomePage/>}>
-<Route path='/:studentId' element={<HomePage/>}/>
-</Route>
+  <Route path='/' element={<HomePage/>}/>
+{/* <Route path='/:studentId' element={<HomePage/>}/> */}
+{/* </Route> */}
   <Route path='/login' element={<Login/>} />
   <Route path='/User' element={<CreateUser/>} />
   <Route path='/createStudent' element={<CreateStudent/>} />

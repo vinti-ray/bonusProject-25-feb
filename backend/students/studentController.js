@@ -28,9 +28,13 @@ const updateStudent = async function(req,res){
 }
 
 const deleteStudent = async function(req,res){
-    let data = req.params.studentId
-    let finalData = await studentModel.updateOne({_id:data},{$set:{isDeleted:true}})
-    return res.status(200).send({"msg":"Data deleted successfully"})
+try {
+        let data = req.params.studentId
+        let finalData = await studentModel.updateOne({_id:data},{$set:{isDeleted:true}})
+        return res.status(200).send({"msg":"Data deleted successfully"})
+} catch (error) {
+    return res.send("server error")
+}
 }
 
 module.exports = {createStudent,getStudent,updateStudent,deleteStudent}
