@@ -9,10 +9,11 @@ import HomePage from './components/HomePage';
 import Login from './components/Login';
 import CreateUser from './components/CreateUser';
 import CreateStudent from './components/CreateStudent';
-
+import Header from './components/navBar';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
+  <Header/>
   <Routes>
   {/* <Route  path='/' element={<App />} /> */}
   {/* <Route path='/' element={<HomePage/>} /> */}
