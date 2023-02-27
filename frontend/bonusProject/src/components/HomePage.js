@@ -29,7 +29,7 @@ useEffect(()=>{
   axios.get("http://localhost:3001/getStudent",{headers:{'authorization':token}})
   .then((res)=>{setData(res.data.data)})
 
-
+  console.log(data);
 
 },[])
 
@@ -38,6 +38,7 @@ useEffect(()=>{
 
   const onDelete = (e)=>{
     var token = localStorage.getItem("token")
+
     // e.preventDefault()
     if(studentId){
     axios.delete(`http://localhost:3001/deleteStudent/${studentId}`,{headers:{'authorization':token}})
@@ -49,6 +50,7 @@ useEffect(()=>{
 
 const onEdit = async(e)=>{
   e.preventDefault()
+
   console.log(studentId)
   // {setStudentId(post._id)}
   console.log(studentId);
@@ -60,7 +62,9 @@ const onEdit = async(e)=>{
     marks:marks
   }
   if(studentId){
-    axios.put(`http://localhost:3001/updateStudent/${studentId}`,data,{headers:{'authorization':token}})
+    
+
+    axios.patch(`http://localhost:3001/updateStudent/${studentId}`,data,{headers:{'authorization':token}})
     .then(()=>{navigate("/")})
     .catch((res)=>{alert(res.data)})
 }}

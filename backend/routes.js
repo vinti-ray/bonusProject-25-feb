@@ -7,7 +7,7 @@ const {authentication} = require("./smiddleware/auth")
 
 route.post("/createStudent",authentication,createStudent )
 route.get("/getStudent",authentication,getStudent )
-route.put("/updateStudent/:studentId",updateStudent )
+route.patch("/updateStudent/:studentId",updateStudent )
 route.delete("/deleteStudent/:studentId",authentication,deleteStudent )
 
 route.post("/createUser",createUser )

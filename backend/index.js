@@ -21,7 +21,7 @@ app.use(cors())
 mongoose.set('strictQuery', true)
 
 app.use(express.json())
-mongoose.connect('mongodb+srv://Nishant:Kh8cI13BDxDiuUHh@cluster0.k0s0qbw.mongodb.net/laptop').then(()=>{console.log("MONGO db is connect")}).catch((err)=>{console.log(err.message)})
+mongoose.connect('mongodb+srv://vintiray:7091201680@cluster0.ahtxrqr.mongodb.net/companyAssignmentFeb').then(()=>{console.log("MONGO db is connect")}).catch((err)=>{console.log(err.message)})
 
 app.use('/',route)
 

@@ -34,7 +34,7 @@ const Login = () => {
         const check = validate()
         if(check){
         axios.post("http://localhost:3001/login",{email:email,password:password})
-        .then((r)=>{console.log(r.data.data);localStorage.setItem("token",r.data.data)   ; navigate("/createStudent") })
+        .then((r)=>{console.log(r.data.data);localStorage.setItem("token",r.data.data)   ; navigate("/") })
         .catch((s)=>{console.log(s.response);})
         
       }}

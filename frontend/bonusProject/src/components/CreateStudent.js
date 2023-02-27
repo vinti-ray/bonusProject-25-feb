@@ -29,7 +29,7 @@ const CreateStudent = () => {
         var token = localStorage.getItem("token")
         // const check = validate()
         // if(check){{headers:{'authorization':token}}
-        axios.post("http://localhost:3001/createStudent",{subject:subject,marks:marks,name:name},)
+        axios.post("http://localhost:3001/createStudent",{subject:subject,marks:marks,name:name},{headers:{'authorization':token}})
         .then((r)=>{navigate("/")})
         .catch((s)=>{alert(s.message)})
         

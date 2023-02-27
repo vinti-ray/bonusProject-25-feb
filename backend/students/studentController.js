@@ -15,7 +15,7 @@ const getStudent = async function(req,res){
     let data  = req.query
     let {name}= data
     let filter ={isDeleted:false,name:name}
-    let finalData = await studentModel.find()
+    let finalData = await studentModel.find({isDeleted:false})
     if(!finalData) return  res.status(200).send({msg:"No Students present"})
     return  res.status(200).send({"data":finalData})
 }
