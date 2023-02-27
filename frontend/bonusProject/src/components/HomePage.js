@@ -89,7 +89,7 @@ return (
             <Card.Body>
               <Card.Title className="card-title">Name:{post.name}</Card.Title>
               <Card.Text style={{color:"blue"}}>
-                Sunject:{post.subject}
+                Subject:{post.subject}
               </Card.Text>
               <Card.Text style={{color:"grey"}}>
                 Marks: {post.marks}
